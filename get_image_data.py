@@ -2,6 +2,7 @@ import depthai as dai
 import cv2
 import os
 import re
+from utils import *
 
 def make_pipeline(imgsz_w: int = 1920, imgsz_h: int = 1080) -> dai.Pipeline:
     pipeline = dai.Pipeline()
@@ -24,17 +25,6 @@ def make_pipeline(imgsz_w: int = 1920, imgsz_h: int = 1080) -> dai.Pipeline:
 
     return pipeline
 
-def get_max_counter(folder_path: str) -> int:
-    pattern = re.compile(r"^\d{2}_(\d{6})\.jpg$")
-    max_counter = 0
-
-    for filename in os.listdir(folder_path):
-        match = pattern.match(filename)
-        if match:
-            counter = int(match.group(1))
-            max_counter = max(max_counter, counter)
-    return max_counter
-
 def collect_data(class_name: str, class_type: str = 'person',
                 class_id: int = 0, num_samples: int = 250, imgsz_w: int = 1920, imgsz_h: int = 1080) -> None:
     
@@ -43,16 +33,15 @@ def collect_data(class_name: str, class_type: str = 'person',
     with dai.Device(pipeline) as device:
         video = device.getOutputQueue(name="video", maxSize=1, blocking=False)
         max_counter = 0
-        folder_path = f"./Data/{class_name}/"
-        if os.path.isdir(folder_path):
-            max_counter = get_max_counter(folder_path)
-            print('x')
-        else:
-            os.makedirs(os.path.dirname(folder_path), exist_ok=True)
+        folder_path = f"./Data/{class_name}/Images/"
+        make_output_file(folder_path)
+        max_counter = get_max_counter(folder_path, 'jpg')
         counter = max_counter
+        
         while counter < max_counter + num_samples:
             videoIn = video.get()
             counter += 1
+            print(counter)
             filename = f"{class_id:02d}_{counter:06d}.jpg"
             cv2.imwrite(folder_path + filename, videoIn.getCvFrame())
             # Get BGR frame from NV12 encoded video frame to show with opencv
