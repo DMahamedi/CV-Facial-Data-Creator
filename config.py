@@ -1,5 +1,5 @@
 
-NEW_CLASS_NAME = 'Darius'
+NEW_CLASS_NAME = 'Placeholder'
 CLASS_TYPE = 'person'
 YOLO_MODEL = 'yolov10m.pt' # NOTE: Not recommended to go above yolo large (L)
 IMAGE_RESOLUTION = (1920, 1080)
