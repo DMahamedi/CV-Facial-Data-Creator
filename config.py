@@ -4,7 +4,7 @@ CLASS_TYPE = 'person'
 YOLO_MODEL = 'yolov10m.pt' # NOTE: Not recommended to go above yolo large (L)
 IMAGE_RESOLUTION = (1920, 1080)
 NUM_FRAME_SAMPLES = 200
-USE_EXISTING_VIDEO = False
+USE_EXISTING_VIDEO = False # Use False for when you have an OAK Device to use
 VIDEO_PATH = ''
 
 '''
@@ -16,11 +16,13 @@ CREATE_IMAGES = True # Default: True
 ANNOTATE_IMAGES = True # Default: True
 FILTER_ANNOTATIONS = True # Default: True
 
-NEW_CLASS_ID = None # Default: None    
-# NOTE: NEW_CLASS_ID is for advanced use, intended for not all data is relabeled
-# It is always recommended to use a different functionality to accomplish this.
+RELABEL_ANNOTATION_CLASS_ID = False # Default: True
+NEW_CLASS_ID = None # Default: None
+# NOTE: Do not set RELABEL_ANNOTATION_CLASS_ID = True without setting NEW_CLASS_ID, as this can cause different datasets to be grouped together
 
-
+ANNOTATE_NEW_CLASS_ID = False # Default: False   
+# NOTE: ANNOTATE_NEW_CLASS_ID is for advanced use, it is recommended to use RELABEL_OUTPUTS
+# NOTE: Do not use ANNOTATE_NEW_CLASS_ID without setting NEW_CLASS_ID, it creates the same issue as RELABEL_OUTPUTS
 
 CLASS_IDS = {'person': 0, 'bicycle': 1, 'car': 2,
             'motorcycle': 3, 'airplane': 4, 'bus': 5,
@@ -51,3 +53,6 @@ CLASS_IDS = {'person': 0, 'bicycle': 1, 'car': 2,
 
 CLASS_ID = CLASS_IDS[CLASS_TYPE]
 IMGSZ_W, IMGSZ_H = IMAGE_RESOLUTION
+
+if RELABEL_ANNOTATION_CLASS_ID or ANNOTATE_NEW_CLASS_ID:
+    NEW_CLASS_ID = 99
