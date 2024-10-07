@@ -5,10 +5,22 @@ YOLO_MODEL = 'yolov10m.pt' # NOTE: Not recommended to go above yolo large (L)
 IMAGE_RESOLUTION = (1920, 1080)
 NUM_FRAME_SAMPLES = 200
 USE_EXISTING_VIDEO = False
+VIDEO_PATH = ''
 
 '''
     See CLASS_IDS for available values of CLASS_TYPE
 '''
+
+# Additional, optional parameters for more complicated pipeline configuring
+CREATE_IMAGES = True # Default: True
+ANNOTATE_IMAGES = True # Default: True
+FILTER_ANNOTATIONS = True # Default: True
+
+NEW_CLASS_ID = None # Default: None    
+# NOTE: NEW_CLASS_ID is for advanced use, intended for not all data is relabeled
+# It is always recommended to use a different functionality to accomplish this.
+
+
 
 CLASS_IDS = {'person': 0, 'bicycle': 1, 'car': 2,
             'motorcycle': 3, 'airplane': 4, 'bus': 5,
