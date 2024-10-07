@@ -4,6 +4,14 @@ from ultralytics import YOLO
 from utils import *
 
 def get_images_to_annotate(image_folder_path: str, label_folder_path: str) -> list[str]:
+    '''
+        Finds the newest images which were not previously annotated, in case of adding to existing data
+        :params:
+            image_folder_path: path to the images being annotated
+            label_folder_path: path to the folder for annotation outputs
+        :returns:
+            list[str]: list of which images to annotate (leaving out ones with existing annotations)
+    '''
     max_counter = get_max_counter(label_folder_path, 'txt')
     annotation_images = []
     annotation_names = []
@@ -14,16 +22,23 @@ def get_images_to_annotate(image_folder_path: str, label_folder_path: str) -> li
             annotation_names.append(filename[:-4])
     return annotation_images, annotation_names
 
-def annotate_images(class_name: str, class_type: str = 'person', model_name: str = './Models/yolov10m.pt', class_id: int = 0) -> None:
+def annotate_images(new_class_name: str, model_name: str = './Models/yolov10m.pt', base_class_id: int = 0) -> None:
+    '''
+        Use a trained model to identify the base class, relabel the predictions to be the new class type
+        :params:
+            new_class_name: str name of the new class we want to annotate
+            model_name: model to use to get the class_type predictions
+            base_class_id: class id of the base class that the new class is 'derived' from
+    '''
     model = YOLO(model_name)
 
-    annotation_labels_path = f'./Data/{class_name}/Labels/'
-    annotation_images_path = f'./Data/{class_name}/Images/'
+    annotation_labels_path = f'./Data/{new_class_name}/Labels/'
+    annotation_images_path = f'./Data/{new_class_name}/Images/'
     make_output_file(annotation_labels_path)
     min_counter = get_max_counter(annotation_labels_path)
     annotation_images, annotation_names = get_images_to_annotate(annotation_images_path, annotation_labels_path)
 
-    results = model(annotation_images, device='cuda:0', half = True, classes=[class_id], max_det=1)
+    results = model(annotation_images, device='cuda:0', half = True, classes=[base_class_id], max_det=1)
 
     for i in range(len(results)):
         output_path = f'{annotation_labels_path}{annotation_names[i]}.txt'
