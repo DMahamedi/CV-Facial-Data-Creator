@@ -4,6 +4,7 @@ CLASS_TYPE = 'person'
 YOLO_MODEL = 'yolov10m.pt' # NOTE: Not recommended to go above yolo large (L)
 IMAGE_RESOLUTION = (1920, 1080)
 NUM_FRAME_SAMPLES = 200
+USE_EXISTING_VIDEO = False
 
 '''
     See CLASS_IDS for available values of CLASS_TYPE
