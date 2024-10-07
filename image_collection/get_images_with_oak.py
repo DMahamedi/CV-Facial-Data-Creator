@@ -41,7 +41,7 @@ def collect_data(class_name: str, class_type: str = 'person',
         while counter < max_counter + num_samples:
             videoIn = video.get()
             counter += 1
-            filename = f"{class_id:02d}_{counter:06d}.jpg"
+            filename = get_file_name(counter, class_id) + '.jpg'
             cv2.imwrite(folder_path + filename, videoIn.getCvFrame())
             cv2.imshow("video", videoIn.getCvFrame())
             if cv2.waitKey(1) == ord('q'):
