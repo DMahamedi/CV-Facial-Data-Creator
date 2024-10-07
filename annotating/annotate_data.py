@@ -2,6 +2,7 @@ import cv2
 import os
 from ultralytics import YOLO
 from utils import *
+from annotating.relabel_outputs import rewrite_annotation_class
 
 def get_images_to_annotate(image_folder_path: str, label_folder_path: str) -> list[str]:
     '''
@@ -22,13 +23,14 @@ def get_images_to_annotate(image_folder_path: str, label_folder_path: str) -> li
             annotation_names.append(filename[:-4])
     return annotation_images, annotation_names
 
-def annotate_images(new_class_name: str, model_name: str = './Models/yolov10m.pt', base_class_id: int = 0) -> None:
+def annotate_images(new_class_name: str, model_name: str = './Models/yolov10m.pt', base_class_id: int = 0, new_class_id: int = None) -> None:
     '''
         Use a trained model to identify the base class, relabel the predictions to be the new class type
         :params:
             new_class_name: str name of the new class we want to annotate
             model_name: model to use to get the class_type predictions
             base_class_id: class id of the base class that the new class is 'derived' from
+            new_class_id: id to give the new class we are labeling. Optional.
     '''
     model = YOLO(model_name)
 
@@ -43,3 +45,6 @@ def annotate_images(new_class_name: str, model_name: str = './Models/yolov10m.pt
     for i in range(len(results)):
         output_path = f'{annotation_labels_path}{annotation_names[i]}.txt'
         results[i].save_txt(output_path)
+    
+    if new_class_id:
+        rewrite_annotation_class(new_class_name, new_class_id)
