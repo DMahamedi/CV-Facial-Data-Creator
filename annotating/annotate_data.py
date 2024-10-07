@@ -2,7 +2,7 @@ import cv2
 import os
 from ultralytics import YOLO
 from utils import *
-from annotating.relabel_outputs import rewrite_annotation_class
+from annotating.relabel_outputs import rewrite_annotation_class_id
 
 def get_images_to_annotate(image_folder_path: str, label_folder_path: str) -> list[str]:
     '''
@@ -49,4 +49,4 @@ def annotate_images(new_class_name: str, model_name: str = './Models/yolov10m.pt
         results[i].save_txt(output_path)
     
     if new_class_id:
-        rewrite_annotation_class(new_class_name, new_class_id)
+        rewrite_annotation_class_id(new_class_name, new_class_id)
