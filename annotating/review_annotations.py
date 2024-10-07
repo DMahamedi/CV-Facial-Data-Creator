@@ -3,6 +3,11 @@ import os
 
 
 def get_bounding_box(annotation_filepath: str) -> list:
+    '''
+        Read the bounding box from a specific annotation
+        :params:
+            annotation_filepath: path to the annotation file
+    '''
     box = []
     with open(annotation_filepath, 'r') as f:
         line = f.readline().strip().split(' ')
@@ -10,8 +15,14 @@ def get_bounding_box(annotation_filepath: str) -> list:
         box.append([class_id, x_center, y_center, width, height])
     return box
 
-def filter_annotations(class_id: int, class_name: str) -> None:
-    folder_path = f'./Data/{class_name}/'
+def filter_annotations(new_class_name: str) -> None:
+    '''
+        Used to view each synthetic data annotation for a specific new class and verify whether it is usable for training
+            Use 'x' to specify/delete bad data, 'q' to quit early, press any other key to continue
+        :params:
+            new_class_name: str name of the new class being labeled
+    '''
+    folder_path = f'./Data/{new_class_name}/'
     images_path = f'{folder_path}/Images/'
     labels_path = f'{folder_path}/Labels/'
 
@@ -34,7 +45,7 @@ def filter_annotations(class_id: int, class_name: str) -> None:
                 right = int((x_center + (width / 2)) * img_width)
                 bottom = int((y_center + (height / 2)) * img_height)
 
-                cv2.putText(image, f'{class_name}',
+                cv2.putText(image, f'{new_class_name}',
                         (left,top-10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, 
                         (255,0,0), 2, cv2.LINE_AA)
 
