@@ -16,7 +16,7 @@ def rewrite_annotation_label(annotation_filepath: str, new_class_id: int) -> Non
         f.seek(0) #note this is meant for one-line file annotations
         f.write(' '.join(values))
 
-def rewrite_annotation_class(class_name: str, new_class_id: int) -> None:
+def rewrite_annotation_class_id(class_name: str, new_class_id: int) -> None:
     '''
         Relabel all of a new class types annotations to have a unique class id
         Needed for converting generic classes (i.e. person) to something unique (like a specific individual)
