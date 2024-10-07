@@ -12,15 +12,15 @@ VIDEO_PATH = ''
 '''
 
 # Additional, optional parameters for more complicated pipeline configuring
-CREATE_IMAGES = True # Default: True
-ANNOTATE_IMAGES = True # Default: True
+CREATE_IMAGES = False # Default: True
+ANNOTATE_IMAGES = False # Default: True
 FILTER_ANNOTATIONS = True # Default: True
 
 RELABEL_ANNOTATION_CLASS_ID = False #Default: False
 NEW_CLASS_ID = None # Default: None
 # NOTE: Do not set RELABEL_ANNOTATION_CLASS_ID = True without setting NEW_CLASS_ID, as this can cause different datasets to be grouped together
 
-ANNOTATE_NEW_CLASS_ID = False # Default: False. Advanced, recommended to use RELABEL_OUTPUTS
+ANNOTATE_NEW_CLASS_ID = False # Default: False. Advanced, recommended to use RELABEL_OUTPUTS instead
 # NOTE: Do not use ANNOTATE_NEW_CLASS_ID without setting NEW_CLASS_ID, it creates the same issue as RELABEL_OUTPUTS
 
 CLASS_IDS = {'person': 0, 'bicycle': 1, 'car': 2,
