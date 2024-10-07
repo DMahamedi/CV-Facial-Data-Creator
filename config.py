@@ -1,7 +1,7 @@
 
-NEW_CLASS_NAME = 'Placeholder'
+NEW_CLASS_NAME = 'Darius'
 CLASS_TYPE = 'person'
-YOLO_MODEL = 'yolov10m.pt' # NOTE: Not recommended to go above yolo large (L)
+YOLO_MODEL = 'yolov10m.pt' # Not recommended to go above yolo large (L)
 IMAGE_RESOLUTION = (1920, 1080)
 NUM_FRAME_SAMPLES = 200
 USE_EXISTING_VIDEO = False # Use False for when you have an OAK Device to use
@@ -16,11 +16,11 @@ CREATE_IMAGES = True # Default: True
 ANNOTATE_IMAGES = True # Default: True
 FILTER_ANNOTATIONS = True # Default: True
 
-RELABEL_ANNOTATION_CLASS_ID = False # Default: True
+RELABEL_ANNOTATION_CLASS_ID = False #Default: False
 NEW_CLASS_ID = None # Default: None
 # NOTE: Do not set RELABEL_ANNOTATION_CLASS_ID = True without setting NEW_CLASS_ID, as this can cause different datasets to be grouped together
 
-ANNOTATE_NEW_CLASS_ID = False # Default: False, NOTE: advanced, recommended to use RELABEL_OUTPUTS
+ANNOTATE_NEW_CLASS_ID = False # Default: False. Advanced, recommended to use RELABEL_OUTPUTS
 # NOTE: Do not use ANNOTATE_NEW_CLASS_ID without setting NEW_CLASS_ID, it creates the same issue as RELABEL_OUTPUTS
 
 CLASS_IDS = {'person': 0, 'bicycle': 1, 'car': 2,
