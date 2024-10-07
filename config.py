@@ -20,8 +20,7 @@ RELABEL_ANNOTATION_CLASS_ID = False # Default: True
 NEW_CLASS_ID = None # Default: None
 # NOTE: Do not set RELABEL_ANNOTATION_CLASS_ID = True without setting NEW_CLASS_ID, as this can cause different datasets to be grouped together
 
-ANNOTATE_NEW_CLASS_ID = False # Default: False   
-# NOTE: ANNOTATE_NEW_CLASS_ID is for advanced use, it is recommended to use RELABEL_OUTPUTS
+ANNOTATE_NEW_CLASS_ID = False # Default: False, NOTE: advanced, recommended to use RELABEL_OUTPUTS
 # NOTE: Do not use ANNOTATE_NEW_CLASS_ID without setting NEW_CLASS_ID, it creates the same issue as RELABEL_OUTPUTS
 
 CLASS_IDS = {'person': 0, 'bicycle': 1, 'car': 2,
