@@ -18,7 +18,7 @@ def main():
 
     if config.ANNOTATE_IMAGES and not config.ANNOTATE_NEW_CLASS_ID:
         annotate_images(config.NEW_CLASS_NAME, config.YOLO_MODEL, config.CLASS_ID)
-    elif config.ANNOTATE_NEW_CLASS_ID:
+    elif config.ANNOTATE_IMAGES and config.ANNOTATE_NEW_CLASS_ID:
         annotate_images(config.NEW_CLASS_NAME, config.YOLO_MODEL, config.CLASS_ID, config.NEW_CLASS_ID)
     
     if config.FILTER_ANNOTATIONS:
