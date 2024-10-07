@@ -27,7 +27,7 @@ def filter_annotations(new_class_name: str) -> None:
     labels_path = f'{folder_path}/Labels/'
 
     for annotation_filename in os.listdir(labels_path):
-        image_name = annotation_filename[:-4] #filename=XX_XXXXXX.txt, cut the '.txt'
+        image_name = annotation_filename[:-4] #filename=XXX_XXXXXX.txt, cut the '.txt'
         image_filepath = images_path + image_name + '.jpg'
         annotation_filepath = labels_path + annotation_filename
 
