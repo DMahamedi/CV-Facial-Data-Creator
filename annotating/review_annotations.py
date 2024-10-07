@@ -7,6 +7,8 @@ def get_bounding_box(annotation_filepath: str) -> list:
         Read the bounding box from a specific annotation
         :params:
             annotation_filepath: path to the annotation file
+        :returns:
+            list: list of bounding boxes in format class_id, x_center, y_center, width, height (all normalized)
     '''
     box = []
     with open(annotation_filepath, 'r') as f:
@@ -21,6 +23,8 @@ def filter_annotations(new_class_name: str) -> None:
             Use 'x' to specify/delete bad data, 'q' to quit early, press any other key to continue
         :params:
             new_class_name: str name of the new class being labeled
+        :returns:
+            None
     '''
     folder_path = f'./Data/{new_class_name}/'
     images_path = f'{folder_path}/Images/'

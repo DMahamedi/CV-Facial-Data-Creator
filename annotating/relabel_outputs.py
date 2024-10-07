@@ -23,6 +23,8 @@ def rewrite_annotation_class(class_name: str, new_class_id: int) -> None:
         :params:
             class_name: name of the new class we want to label
             new_class_id: the class id we want to give the new class
+        :returns:
+            None
     '''
     annotation_folder_path = f'./Data/{class_name}/Labels/'
     

@@ -31,6 +31,8 @@ def annotate_images(new_class_name: str, model_name: str = './Models/yolov10m.pt
             model_name: model to use to get the class_type predictions
             base_class_id: class id of the base class that the new class is 'derived' from
             new_class_id: id to give the new class we are labeling. Optional.
+        :returns:
+            None
     '''
     model = YOLO(model_name)
 
