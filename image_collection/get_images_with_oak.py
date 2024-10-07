@@ -43,8 +43,6 @@ def collect_data(class_name: str, class_type: str = 'person',
             counter += 1
             filename = f"{class_id:02d}_{counter:06d}.jpg"
             cv2.imwrite(folder_path + filename, videoIn.getCvFrame())
-            # Get BGR frame from NV12 encoded video frame to show with opencv
-            # Visualizing the frame on slower hosts might have overhead
             cv2.imshow("video", videoIn.getCvFrame())
             if cv2.waitKey(1) == ord('q'):
                 break
